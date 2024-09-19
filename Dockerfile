@@ -30,6 +30,7 @@ RUN apk add --no-cache \
   php83-xml \
   php83-xmlreader \
   php83-xmlwriter \
+  php83-pecl-xdebug \
   supervisor
 
 # Configure nginx - http
@@ -41,7 +42,7 @@ COPY config/conf.d /etc/nginx/conf.d/
 ENV PHP_INI_DIR /etc/php83
 COPY config/fpm-pool.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
 COPY config/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
-
+COPY config/xdebug.ini ${PHP_INI_DIR}/conf.d/xdebug.ini
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
